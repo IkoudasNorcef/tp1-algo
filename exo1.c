@@ -1,32 +1,77 @@
-# include <stdio.h>
-# include <time.h>
+#include <stdio.h>
+#include <math.h>
 
-int naive_Fibonacci(int n){
-    if (n == 0 || n == 1){
+int is_sorted_increasing(int n, int* A){
+    int i = 1;
+    for (i; i<= n; i++){
+        if (A[i] <= A[i-1]){
+            printf("liste pas croissante\n");
             return 1;
+        }
     }
-    else{
-        return naive_Fibonacci(n-1) + naive_Fibonacci(n-2);
-    }
+    printf("liste croissante\n");
+    return 0;
 }
 
-
-
-int dynamique_Fibonacci(int n, int DP_F){
-    if (n <= 1){
-        return n;
+int search(int a, int n, int* A){
+    int i = 0;
+    for(i; i<=n; i++){
+        if (A[i] == a){
+            printf("valeur dans la liste\n");
+            return 0;
+        }
     }
-    else if (DP_F[n] != -1){
-        return DP_F[n];
-    }
-    DP_F[n] = dynamique_Fibonacci(n - 1, DP_F) + dynamique_Fibonacci(n-2, DP_F);
-    return DP_F[n]
+    printf("valeur pas dans la liste\n");
+    return 1;
 }
 
-
-void main(int n){
-    naive_Fibonacci(n);
-    int DP_F[n + 1] = {-1};
-    dynamique_Fibonacci(n, DP_F);
+int jump_search(int a, int n, int* A){
+    int b = sqrt(n);
+    if (is_sorted_increasing == 1){
+        return -1;
+    }
+    for (int i=b; i<=b; i += b){
+        if (A[i-1] >= a){
+            for (int j = i-b; j<=i; j++){
+                if (A[j] == a){
+                printf("valeur dans la liste\n");
+                return 0;
+                }
+            }
+        }
+    }
+    printf("valeur pas dans la liste\n");
+    return 1;
 }
 
+int binary_search(int a, int n, int* A){
+    if (is_sorted_increasing == 1){
+        printf("liste pas bonne\n");
+        return -1;
+    }
+    int b = n/2;
+    if (A[b] > a){
+        binary_search(a, b, A);
+    }
+    else if (A[b] < a){
+        int c = ;
+        binary_search(a, c ,A);
+    }
+    else if (A[b] == a){
+        printf("valeur dans la liste\n");
+        return 0;
+    }
+    printf("valeur pas dans la liste\n");
+    return 1;
+} 
+
+
+
+
+int A[5] = {5, 4, 6, 2, 1};
+
+void main(){
+    is_sorted_increasing(5, A);
+    search(3, 5, A);
+    jump_search(3, 5, A);
+}
